@@ -1,0 +1,64 @@
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h> 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+       class Node 
+        { 
+        public:
+            int data;
+            Node *next;
+            Node(int data) 
+            {
+               this->data = data;
+              this->next = NULL;
+            }
+        };
+
+*****************************************************************/
+Node* getmiddle(Node* &head){
+    //edge case
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+
+    //2 Nodes
+    if(head->next->next==NULL){
+        return head->next;
+    }
+    Node* slow=head;
+    Node* fast=head->next;
+    while(fast!=NULL ){
+        fast=fast->next;
+        if(fast!=NULL){
+            fast=fast->next;
+        }
+        slow=slow->next;
+        
+    }
+    return slow;
+}
+int getlength(Node* &head){
+    int len=0;
+    while(head!=NULL){
+        head=head->next;
+        len++;
+    }
+    return len;
+}
+
+Node *findMiddle(Node *head) {
+    // Write your code here
+
+    getmiddle(head);//2nd approach optimise
+
+    Node* temp=head;//1st approach brute force approach
+    int len=getlength(head);
+    int ans=len/2;
+    int cnt=0;
+    while(cnt<ans){
+        temp=temp->next;
+        cnt++;
+    }return temp;
+}
