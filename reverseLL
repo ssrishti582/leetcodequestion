@@ -1,0 +1,61 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+//RECURSIVE APPROACH 1
+Node* reverse1(Node* head){
+	if(head==NULL || head->next==NULL){
+		return NULL;
+	}
+	Node* chotahead=reverse1(head->next);
+	head->next->next=head;
+	head->next=NULL;
+	return chotahead;
+
+}
+
+//RECURSIVE APPROACH
+void reverse(Node* &head,Node* &curr,Node* &prev){
+	if(curr==NULL){
+		prev=curr;
+	}//base case
+	Node* forward=curr->next;
+	reverse(head,forward,curr);
+	curr->next=prev;
+
+}
+
+//ITERATIVE APPROACH 2
+Node* reverseLinkedList(Node * head)
+{
+    if(head==NULL || head->next==NULL){
+		return head;
+	}
+	// Write your code here
+	Node *prev=NULL;
+	Node *curr=head;
+	Node * forward=NULL;
+
+	while(curr!=NULL){
+		forward=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=forward;
+	}
+	return prev;
+}
